@@ -1,0 +1,13 @@
+.products {
+    background-image: url('../../../assets/image/burgers_bg.png');
+    background-position: top center;
+    background-size: 1400px;
+    padding-bottom: 180px;
+}
+
+.products-items {
+    display: grid;
+    grid-template-columns: repeat(3, 384px);
+    margin-top: 60px;
+    gap: 24px;
+}

@@ -1,0 +1,24 @@
+
+.menu {
+    margin-left: 191px;
+}
+
+.menu-list {
+    display: flex;
+    list-style: none;
+}
+
+.menu-item {
+    margin-right: 88px;
+}
+
+.menu-item a {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+}
+
+.menu-item a:hover {
+    border-bottom: 2px solid white;
+}

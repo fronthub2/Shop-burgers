@@ -1,0 +1,30 @@
+.why {
+    background-image: url(../assets/image/whybg.png);
+    background-position: top center;
+    background-size: inherit;
+    padding-bottom: 180px;
+}
+
+
+.why-items {
+    display: grid;
+    grid-template-columns: repeat(3, 312px);
+    justify-content: center;
+    gap: 100px;
+    margin-top: 60px;
+}
+
+.why-item {
+    text-align: center;
+}
+
+.why-item-title {
+    font-size: 24px;
+    line-height: 29px;
+    padding: 24px 0;
+}
+
+.why-item-text {
+    font-size: 16px;
+    line-height: 140%;
+}

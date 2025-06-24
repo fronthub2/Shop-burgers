@@ -1,0 +1,73 @@
+.order .container {
+    position: relative;
+}
+
+.order {
+    background-image: url(../assets/image/order_bg.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    padding-bottom: 180px;
+    overflow: hidden;
+}
+
+.order-image {
+    position: absolute;
+    top: 0;
+    right: calc(100% - 764px);
+    z-index: -1;
+}
+
+.order-form {
+    border-radius: 16px;
+    border: 1px solid #353535;
+    background: #211A16;
+    margin-top: 60px;
+    width: 426px;
+    padding: 60px 40px;
+    box-sizing: border-box;
+    margin-left: 674px;
+}
+
+.order-form-text {
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+}
+
+.order-form-inputs {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.order-form-input {
+    width: 344px;
+    height: 62px;
+    background: linear-gradient(95.61deg, #DA8023 0%, #E2B438 100%);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.order-form-input.error {
+    background: red;
+}
+
+.order-form-inputs input {
+    padding: 16px 10px;
+    background: #211A16;
+    border-radius: 8px;
+    width: 342px;
+    height: 60px;
+    color: white;
+    box-sizing: border-box;
+    outline: none;
+    border: 1px solid transparent;
+}
+
+.order-form-inputs .button {
+    width: 344px;
+    height: 62px;
+}

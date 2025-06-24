@@ -1,0 +1,43 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.header {
+    padding: 40px 0;
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    vertical-align: bottom;
+}
+
+.currency {
+    border: 1px solid white;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    padding: 11px 0;
+    box-sizing: border-box;
+    border-radius: 5px;
+    user-select: none;
+    margin-left: auto;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.footer {
+    padding: 20px 0;
+}
+
+.footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

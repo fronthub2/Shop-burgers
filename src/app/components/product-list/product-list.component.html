@@ -1,0 +1,13 @@
+<section class="products" id="products">
+  <div class="container">
+    <div class="products-title common-title">выберите свой бургер</div>
+    <div class="products-items">
+      <app-product
+        *ngFor="let product of (products$ | async)"
+        [currency]="currency"
+        [product]="product"
+      ></app-product>
+    </div>
+  </div>
+</section>
+<!--  #products -->

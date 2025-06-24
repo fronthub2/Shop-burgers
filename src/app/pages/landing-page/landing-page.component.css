@@ -1,0 +1,43 @@
+.main-content {
+    padding: 103px 0 199px;
+}
+
+.main-content .container {
+    position: relative;
+}
+
+.menu-info {
+    max-width: 608px;
+}
+
+
+.main-small-info {
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    background-color: #D3320F;
+    border-radius: 100px;
+    padding: 12px 16px;
+    cursor: pointer;
+}
+
+.main-title {
+    font-family: 'Merriweather', sans-serif;
+    font-size: 120px;
+    line-height: 156px;
+    letter-spacing: 3.6px;
+    text-transform: uppercase;
+    margin-bottom: 56px;
+}
+
+.main-text {
+    font-size: 24px;
+    margin-bottom: 56px;
+    line-height: 29px;
+}
+
+.main-logo {
+    position: absolute;
+    top: -123px;
+    left: calc(100% - 991px);
+}
