@@ -74,7 +74,8 @@ export class ProductService {
 
   updatePriceProduct(coeff: number): void {
     this.getProducts().pipe(
-      map((prs) => prs.map((pr) => (pr.price = pr.basePrice * coeff)))
-    );
+      map((prs) => prs.map((pr) => (pr.price = pr.basePrice * coeff))),
+      take(1)
+    ).subscribe();
   }
 }

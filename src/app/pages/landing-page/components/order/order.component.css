@@ -1,9 +1,10 @@
 .order .container {
     position: relative;
+    z-index: 12;
 }
 
 .order {
-    background-image: url(../assets/image/order_bg.png);
+    background-image: url('../../../../../assets/image/order_bg.png');
     background-repeat: no-repeat;
     background-position: top center;
     padding-bottom: 180px;

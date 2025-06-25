@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { ProductListComponent } from './components/product-list/product-list.component';
 import { LayoutsComponent } from './layouts/layouts.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 export const routes: Routes = [
   {
@@ -9,7 +9,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: ProductListComponent
+        component: LandingPageComponent
       }
     ],
   },

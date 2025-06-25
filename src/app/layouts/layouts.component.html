@@ -10,10 +10,9 @@
       class="currency"
       title="Изменить валюту"
       id="change-currency"
+      (click)="changeCurrency()"
       >
-      <!-- (click)="changeCurrency()" -->
-      <!-- {{ currency }} -->
-        currency
+        {{currency$ | async}}
     </div>
   </div>
 </header>

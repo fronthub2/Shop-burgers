@@ -4,12 +4,14 @@
 
 .main-content .container {
     position: relative;
+    z-index: 12;
 }
 
 .menu-info {
+    position: relative;
+    z-index: 12;
     max-width: 608px;
 }
-
 
 .main-small-info {
     display: inline-block;

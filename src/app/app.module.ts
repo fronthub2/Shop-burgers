@@ -3,17 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
-import { ProductListModule } from './components/product-list/product-list.module';
 import { LayoutsModule } from './layouts/layouts.module';
-import { SharedModule } from './shared/shared.module';
+import { LandingPageModule } from './pages/landing-page/landing-page.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     LayoutsModule,
-    ProductListModule,
-    SharedModule,
+    LandingPageModule,
     RouterModule.forRoot(routes),
   ],
   providers: [],

@@ -28,12 +28,7 @@ export class AppComponent {
   //   };
   // };
 
-  // confirmOrder() {
-  //   if (this.form.valid) {
-  //     alert('Спасибо за заказ! Мы скоро с вами свяжемся!');
-  //     this.form.reset();
-  //   }
-  // };
+  
 
   // changeCurrency() {
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-layouts',
@@ -6,32 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./layouts.component.css'],
 })
 export class LayoutsComponent {
-  // currency = '$';
+  constructor(private productService: ProductService) {}
+  currency$ = this.productService.getCurrency();
 
-
-  // changeCurrency() {
-
-  //   let newCurency = '$';
-  //   let coefficient = 1;
-
-  //   if (this.currency === '$') {
-  //     newCurency = '₽';
-  //     coefficient = 80;
-  //   } else if (this.currency === '₽') {
-  //     newCurency = 'BYN';
-  //     coefficient = 3;
-  //   } else if (this.currency === 'BYN') {
-  //     newCurency = '€';
-  //     coefficient = 0.9;
-  //   } else if (this.currency === '€') {
-  //     newCurency = '¥';
-  //     coefficient = 6.9;
-  //   };
-
-  //   this.currency = newCurency;
-
-  //   this.productsData.forEach((item: any) => {
-  //     item.price = +(item.basePrice * coefficient).toFixed(1);
-  //   });
-  // };
+  changeCurrency() {
+    this.productService.goToNextCurrency();
+  }
 }
