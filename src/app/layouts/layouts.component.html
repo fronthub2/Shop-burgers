@@ -4,7 +4,7 @@
       <img src="../assets/image/Logo.png" alt="logo-burger" />
     </div>
 
-    <app-menu-list></app-menu-list>
+    <app-menu-list (emitScroll)="scrollTo($event)"></app-menu-list>
       
     <div
       class="currency"

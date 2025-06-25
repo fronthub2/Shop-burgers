@@ -7,6 +7,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./order.component.css'],
 })
 export class OrderComponent {
+  constructor() {}
+
   form = new FormGroup({
     order: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required]),
