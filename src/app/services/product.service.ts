@@ -1,32 +1,21 @@
 import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  map,
-  Observable,
-  take
-} from 'rxjs';
+import { BehaviorSubject, map, Observable, take } from 'rxjs';
 import { Product } from '../model/product.interface';
-import { products } from '../model/product.model';
-
-export enum CURRENCY {
-  USD = '$',
-  RUB = '₽',
-  BYN = 'BYN',
-  EUR = '€',
-  YEN = '¥',
-}
-
-export interface CurrencyConversion {
-  newCurrency: CURRENCY;
-  coefficient: number;
-}
+import { HttpProductService } from './http-product.service';
+import { CURRENCY } from '../model/currency.enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
   private _currency = new BehaviorSubject<CURRENCY>(CURRENCY.USD);
-  private _products = new BehaviorSubject<Product[]>(products);
+  private _products = new BehaviorSubject<Product[]>([]);
+
+  constructor(private httpProductService: HttpProductService) {
+    this.httpProductService.getHttpProducts().subscribe({
+      next: (products) => this._products.next(products),
+    });
+  }
 
   nextCurrencyInfo$ = this.getCurrency().pipe(
     map((currentCurrency) => {
@@ -45,8 +34,6 @@ export class ProductService {
     })
   );
 
-  constructor() {}
-
   getCurrency(): Observable<CURRENCY> {
     return this._currency.asObservable();
   }
@@ -59,12 +46,6 @@ export class ProductService {
     return this._products.asObservable();
   }
 
-  setProduct(product: Product) {
-    this._products.pipe(take(1)).subscribe((currentProducts) => {
-      this._products.next([...currentProducts, product]);
-    });
-  }
-
   goToNextCurrency(): void {
     this.nextCurrencyInfo$.pipe(take(1)).subscribe((conversionInfo) => {
       this.setCurrency(conversionInfo.newCurrency);
@@ -73,9 +54,11 @@ export class ProductService {
   }
 
   updatePriceProduct(coeff: number): void {
-    this.getProducts().pipe(
-      map((prs) => prs.map((pr) => (pr.price = pr.basePrice * coeff))),
-      take(1)
-    ).subscribe();
+    this.getProducts()
+      .pipe(
+        map((prs) => prs.map((pr) => (pr.price = pr.basePrice * coeff))),
+        take(1)
+      )
+      .subscribe();
   }
 }

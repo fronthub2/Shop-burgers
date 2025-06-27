@@ -7,6 +7,10 @@
           *ngFor="let product of products$ | async"
           [currency]="currency"
           [product]="product"
+          [isHasProductInBasket]="isHasProductInBasket(product.id)"
+          (emitProductInBasket)="addProductInBasket($event)"
+          (emitAddQuantityProduct)="addQuantity($event)"
+          (emitDeleteQuantityProduct)="deleteQuantity($event)"
         ></app-product>
       </ng-container>
     </div>

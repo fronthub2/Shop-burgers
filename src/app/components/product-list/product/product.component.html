@@ -11,13 +11,29 @@
     </div>
     <div class="products-item-action">
       <app-button
+        *ngIf="!isHasProductInBasket"
         [style]="{
           width: '182px',
           height: '62px'
         }"
         title="Заказать"
         [isIcon]="true"
+        (click)="eventProductInBasket(product)"
       ></app-button>
+
+      <ng-container *ngIf="isHasProductInBasket">
+        <app-button
+          title="-"
+          (click)="eventDeleteQuantityProduct(product)"
+        ></app-button>
+        <div class="products-item-quantity">
+          {{product.quantity}}
+        </div>
+        <app-button
+          title="+"
+          (click)="eventAddQuantityProduct(product)"
+        ></app-button>
+      </ng-container>
     </div>
   </div>
 </div>

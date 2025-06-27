@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
+import { ScrollService } from 'src/app/services/scroll.service';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.css']
+  styleUrls: ['./landing-page.component.css'],
 })
 export class LandingPageComponent {
+  constructor(private scrollService: ScrollService) {}
 
+  scroll(element: string) {
+    this.scrollService.scrollToElement(element);
+  }
 }

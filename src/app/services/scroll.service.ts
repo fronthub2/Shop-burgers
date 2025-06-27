@@ -4,16 +4,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ScrollService {
-  scrollToElement(elementId: string, attempts = 0) {
-    if (attempts > 3) return;
-  
+  scrollToElement(elementId: string) {
     const element = document.getElementById(elementId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      setTimeout(() => {
-        this.scrollToElement(elementId, attempts + 1);
-      }, 300);
     }
   }
 }

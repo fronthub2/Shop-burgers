@@ -37,10 +37,22 @@
     margin-bottom: 8px;
 }
 
+.products-item-quantity {
+    font-size: 18px;
+    line-height: 18px;
+}
+
 .products-item-weght {
     color: #757575;
     font-size: 16px;
     line-height: 18px;
+}
+
+.products-item-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
 }
 
 .button.products-button {

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { LayoutsModule } from './layouts/layouts.module';
 import { LandingPageModule } from './pages/landing-page/landing-page.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,6 +14,7 @@ import { LandingPageModule } from './pages/landing-page/landing-page.module';
     LayoutsModule,
     LandingPageModule,
     RouterModule.forRoot(routes),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
