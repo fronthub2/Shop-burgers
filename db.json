@@ -8,7 +8,8 @@
             "price": 8,
             "basePrice": 8,
             "grams": 365,
-            "quantity": 0
+            "quantity": 0,
+            "baseGrams": 365
         },
         {
             "id": 2,
@@ -18,7 +19,8 @@
             "price": 7,
             "basePrice": 7,
             "grams": 395,
-            "quantity": 0
+            "quantity": 0,
+            "baseGrams": 395
         },
         {
             "id": 3,
@@ -28,7 +30,8 @@
             "price": 10,
             "basePrice": 10,
             "grams": 420,
-            "quantity": 0
+            "quantity": 0,
+            "baseGrams": 420
         },
         {
             "id": 4,
@@ -38,7 +41,8 @@
             "price": 7,
             "basePrice": 7,
             "grams": 220,
-            "quantity": 0
+            "quantity": 0,
+            "baseGrams": 220
         },
         {
             "id": 5,
@@ -48,7 +52,8 @@
             "price": 8,
             "basePrice": 8,
             "grams": 220,
-            "quantity": 0
+            "quantity": 0,
+            "baseGrams": 220
         },
         {
             "id": 6,
@@ -58,7 +63,8 @@
             "price": 9,
             "basePrice": 9,
             "grams": 320,
-            "quantity": 0
+            "quantity": 0,
+            "baseGrams": 320
         },
         {
             "id": 7,
@@ -68,7 +74,8 @@
             "price": 8,
             "basePrice": 8,
             "grams": 220,
-            "quantity": 0
+            "quantity": 0,
+            "baseGrams": 220
         },
         {
             "id": 8,
@@ -78,7 +85,8 @@
             "price": 7,
             "basePrice": 7,
             "grams": 380,
-            "quantity": 0
+            "quantity": 0,
+            "baseGrams": 380
         },
         {
             "id": 9,
@@ -88,7 +96,8 @@
             "price": 11,
             "basePrice": 11,
             "grams": 400,
-            "quantity": 0
+            "quantity": 0,
+            "baseGrams": 400
         },
         {
             "id": 10,
@@ -98,7 +107,8 @@
             "price": 9,
             "basePrice": 9,
             "grams": 300,
-            "quantity": 0
+            "quantity": 0,
+            "baseGrams": 300
         },
         {
             "id": 11,
@@ -108,7 +118,8 @@
             "price": 8,
             "basePrice": 8,
             "grams": 320,
-            "quantity": 0
+            "quantity": 0,
+            "baseGrams": 320
         },
         {
             "id": 12,
@@ -118,7 +129,8 @@
             "price": 9,
             "basePrice": 9,
             "grams": 360,
-            "quantity": 0
+            "quantity": 0,
+            "baseGrams": 360
         }
     ]
 }

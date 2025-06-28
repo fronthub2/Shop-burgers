@@ -1,39 +1,57 @@
-<div class="products-item">
-  <div class="products-item-image">
-    <img src="../assets/image/{{ product.image }}" [alt]="product.title" />
-  </div>
-  <div class="products-item-title">{{ product.title }}</div>
-  <div class="products-item-text">{{ product.text }}</div>
-  <div class="products-items-extra">
-    <div class="products-item-info">
-      <div class="products-item-price">{{ product.price }} {{ currency }}</div>
-      <div class="products-item-weght">{{ product.grams }} гр</div>
+<ng-container *ngIf="!isHasProductInBasket">
+  <div class="products-item">
+    <div class="products-item-image">
+      <img src="../assets/image/{{ product.image }}" [alt]="product.title" />
     </div>
-    <div class="products-item-action">
-      <app-button
-        *ngIf="!isHasProductInBasket"
-        [style]="{
-          width: '182px',
-          height: '62px'
-        }"
-        title="Заказать"
-        [isIcon]="true"
-        (click)="eventProductInBasket(product)"
-      ></app-button>
+    <div class="products-item-title">{{ product.title }}</div>
+    <div class="products-item-text">{{ product.text }}</div>
+    <div class="products-items-extra">
+      <div class="products-item-info">
+        <div class="products-item-price">{{ product.price }} {{ currency }}</div>
+        <div class="products-item-weght">{{ product.grams }} гр</div>
+      </div>
+      <div class="products-item-action">
+        <app-button
+          [style]="{
+            width: '182px',
+            height: '62px'
+          }"
+          title="Заказать"
+          [isIcon]="true"
+          (click)="eventProductInBasket(product)"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+</ng-container>
 
-      <ng-container *ngIf="isHasProductInBasket">
-        <app-button
-          title="-"
-          (click)="eventDeleteQuantityProduct(product)"
-        ></app-button>
-        <div class="products-item-quantity">
-          {{product.quantity}}
+<ng-container *ngIf="isHasProductInBasket">
+  <div class="products-item">
+    <div class="products-item-image">
+      <img src="../assets/image/{{ productInBasket.image }}" [alt]="productInBasket.title" />
+    </div>
+    <div class="products-item-title">{{ productInBasket.title }}</div>
+    <div class="products-item-text">{{ productInBasket.text }}</div>
+    <div class="products-items-extra">
+      <div class="products-item-info">
+        <div class="products-item-price">
+          {{ productInBasket.price }} {{ currency }}
         </div>
-        <app-button
-          title="+"
-          (click)="eventAddQuantityProduct(product)"
-        ></app-button>
-      </ng-container>
+        <div class="products-item-weght">{{ productInBasket.grams }} гр</div>
+      </div>
+      <div class="products-item-action">
+          <app-button
+            title="-"
+            (click)="eventDeleteQuantityProduct(productInBasket)"
+          ></app-button>
+          <div class="products-item-quantity">
+            {{ productInBasket.quantity }}
+          </div>
+          <app-button
+            title="+"
+            (click)="eventAddQuantityProduct(productInBasket)"
+          ></app-button>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>

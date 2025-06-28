@@ -5,6 +5,7 @@ export interface Product {
   text: string;
   price: number;
   basePrice: number;
+  baseGrams: number;
   grams: number;
-  quantity:number
+  quantity: number;
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, take } from 'rxjs';
+import { CURRENCY } from '../model/currency.enum';
 import { Product } from '../model/product.interface';
 import { HttpProductService } from './http-product.service';
-import { CURRENCY } from '../model/currency.enum';
 
 @Injectable({
   providedIn: 'root',

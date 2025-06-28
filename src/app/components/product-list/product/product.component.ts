@@ -11,6 +11,7 @@ export class ProductComponent {
   @Input() product!: Product;
   @Input() currency!: CURRENCY;
   @Input() isHasProductInBasket!: boolean;
+  @Input() productInBasket!:Product;
   @Output() emitProductInBasket = new EventEmitter<Product>();
   @Output() emitAddQuantityProduct = new EventEmitter<Product>();
   @Output() emitDeleteQuantityProduct = new EventEmitter<Product>();

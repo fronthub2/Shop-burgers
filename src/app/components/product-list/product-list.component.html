@@ -8,6 +8,7 @@
           [currency]="currency"
           [product]="product"
           [isHasProductInBasket]="isHasProductInBasket(product.id)"
+          [productInBasket]="getBasketProductById(product.id)"
           (emitProductInBasket)="addProductInBasket($event)"
           (emitAddQuantityProduct)="addQuantity($event)"
           (emitDeleteQuantityProduct)="deleteQuantity($event)"

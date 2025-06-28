@@ -33,4 +33,7 @@ export class ProductListComponent {
     this.basketService.deleteQuantity(product);
   }
 
+  getBasketProductById(productId: number): Product {
+    return this.basketService.getBasketProductById(productId);
+  }
 }

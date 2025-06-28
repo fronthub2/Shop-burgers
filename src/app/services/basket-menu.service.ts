@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../model/product.interface';
+import { ProductService } from './product.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +18,10 @@ export class BasketMenuService {
     }
   }
 
-  getBasketProductById(productId: number): Product | undefined {
-    return this.getBasketProducts().find((prod) => prod.id === productId);
+  getBasketProductById(productId: number): Product {
+    return this.getBasketProducts().find(
+      (prod) => prod.id === productId
+    ) as Product;
   }
 
   addBasketProducts(product: Product): void {
@@ -28,8 +31,7 @@ export class BasketMenuService {
     if (existingProduct) {
       existingProduct.quantity += 1;
     } else {
-      const newProduct = { ...product, quantity: 1 };
-      products.push(newProduct);
+      products.push({ ...product, quantity: 1 });
     }
     localStorage.setItem('basket', JSON.stringify(products));
   }
@@ -52,11 +54,12 @@ export class BasketMenuService {
 
   addQuantity(product: Product): void {
     const products = this.getBasketProducts();
-
     const findProduct = products.find((prod) => prod.id === product.id);
 
     if (findProduct) {
       findProduct.quantity += 1;
+      findProduct.price = findProduct.basePrice * findProduct.quantity;
+      findProduct.grams = findProduct.baseGrams * findProduct.quantity;
     }
 
     localStorage.setItem('basket', JSON.stringify(products));
@@ -68,6 +71,8 @@ export class BasketMenuService {
 
     if (findProduct) {
       findProduct.quantity -= 1;
+      findProduct.price -= findProduct.basePrice;
+      findProduct.grams = findProduct.baseGrams * findProduct.quantity;
 
       if (findProduct.quantity < 1) {
         this.deleteBasketProducts(findProduct.id);
