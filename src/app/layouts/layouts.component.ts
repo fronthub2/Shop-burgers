@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { ProductService } from '../services/product.service';
+import { Store } from '@ngrx/store';
+import { take } from 'rxjs';
+import { CURRENCY } from '../model/currency.enum';
 import { ScrollService } from '../services/scroll.service';
+import { currencyAction } from '../store/currency/currency.action';
+import { currencyFeature } from '../store/currency/currency.reducer';
 
 @Component({
   selector: 'app-layouts',
@@ -8,15 +12,33 @@ import { ScrollService } from '../services/scroll.service';
   styleUrls: ['./layouts.component.css'],
 })
 export class LayoutsComponent {
-  constructor(
-    private productService: ProductService,
-    private scrollService: ScrollService
-  ) {}
+  constructor(private scrollService: ScrollService, private store: Store) {}
 
-  currency$ = this.productService.getCurrency();
+  currency$ = this.store.select(currencyFeature.selectCurrentCurrency);
 
   changeCurrency() {
-    this.productService.goToNextCurrency();
+    this.currency$.pipe(take(1)).subscribe({
+      next: (c) => {
+        this.store.dispatch(
+          currencyAction.changeCurrency({ newCurrency: this.getCurrency(c) })
+        );
+      },
+    });
+  }
+
+  private getCurrency(currentCurrency: CURRENCY) {
+    switch (currentCurrency) {
+      case CURRENCY.USD:
+        return CURRENCY.RUB;
+      case CURRENCY.RUB:
+        return CURRENCY.BYN;
+      case CURRENCY.BYN:
+        return CURRENCY.EUR;
+      case CURRENCY.YEN:
+        return CURRENCY.YEN;
+      default:
+        return CURRENCY.USD;
+    }
   }
 
   scrollTo(element: string) {
