@@ -29,7 +29,7 @@ const reducer = createReducer(
   })),
   on(currencyAction.loadConversionCurrencySuccess, (state, { coeff }) => ({
     ...state,
-    conversionRates: coeff,
+    conversionCoeff: coeff,
   })),
   on(currencyAction.loadConversionCurrencyError, (state, { error }) => ({
     ...state,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Product } from 'src/app/model/product.interface';
 import { BasketMenuService } from 'src/app/services/basket-menu.service';
+import { basketAction } from 'src/app/store/basket/basket.action';
 import { currencyAction } from 'src/app/store/currency/currency.action';
 import { currencyFeature } from 'src/app/store/currency/currency.reducer';
 import { selectProductsWithConvertedPrice } from 'src/app/store/currency/currency.selector';
@@ -16,7 +17,6 @@ export class ProductListComponent implements OnInit {
   constructor(private basketService: BasketMenuService, private store: Store) {}
 
   products$ = this.store.select(selectProductsWithConvertedPrice);
-
   currency$ = this.store.select(currencyFeature.selectCurrentCurrency);
 
   ngOnInit(): void {
@@ -26,6 +26,11 @@ export class ProductListComponent implements OnInit {
 
   addProductInBasket(product: Product): void {
     this.basketService.addBasketProducts(product);
+    this.store.dispatch(
+      basketAction.addedProductInBasket({
+        product: { ...product, quantity: 1 },
+      })
+    );
   }
 
   isHasProductInBasket(productId: number): boolean {
@@ -33,11 +38,22 @@ export class ProductListComponent implements OnInit {
   }
 
   addQuantity(product: Product): void {
-    this.basketService.addQuantity(product);
+    this.store.dispatch(
+      basketAction.incrementQuantityProduct({
+        productId: product.id,
+        quantity: product.quantity,
+      })
+    );
   }
 
   deleteQuantity(product: Product): void {
-    this.basketService.deleteQuantity(product);
+    // this.basketService.deleteQuantity(product);
+    this.store.dispatch(
+      basketAction.decrementQuantityProduct({
+        productId: product.id,
+        quantity: product.quantity,
+      })
+    );
   }
 
   getBasketProductById(productId: number): Product {
