@@ -20,7 +20,7 @@ export class LayoutsComponent {
     this.currency$.pipe(take(1)).subscribe({
       next: (c) => {
         this.store.dispatch(
-          currencyAction.changeCurrency({ newCurrency: this.getCurrency(c) })
+          currencyAction.setCurrency({ newCurrency: this.getCurrency(c) })
         );
       },
     });

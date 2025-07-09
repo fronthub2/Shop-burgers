@@ -3,16 +3,19 @@
     <div class="products-title common-title">выберите свой бургер</div>
     <div class="products-items">
       <ng-container *ngIf="currency$ | async as currency">
-        <app-product
-          *ngFor="let product of products$ | async"
-          [currency]="currency"
-          [product]="product"
-          [isHasProductInBasket]="isHasProductInBasket(product.id)"
-          [productInBasket]="getBasketProductById(product.id)"
-          (emitProductInBasket)="addProductInBasket($event)"
-          (emitAddQuantityProduct)="addQuantity($event)"
-          (emitDeleteQuantityProduct)="deleteQuantity($event)"
-        ></app-product>
+
+        <ng-container *ngIf="products$ | async as products">
+          <app-product
+            *ngFor="let product of products"
+            [currency]="currency"
+            [product]="product"
+            [productInBasket$]="getBasketProductById(product.id)"
+            [isHasProductInBasket$]="hasBasketProducts(product.id)"
+            (emitProductInBasket)="addProductInBasket($event)"
+            (emitAddQuantityProduct)="addQuantity($event)"
+            (emitDeleteQuantityProduct)="deleteQuantity($event)"
+          ></app-product>
+        </ng-container>
       </ng-container>
     </div>
   </div>

@@ -9,7 +9,7 @@ export interface ProductsState {
   error: unknown;
 }
 
-export const initialProduct: ProductsState = {
+export const initialProductState: ProductsState = {
   products: [],
   coeff: 0,
   loading: false,
@@ -17,22 +17,22 @@ export const initialProduct: ProductsState = {
 };
 
 const reducer = createReducer(
-  initialProduct,
-  on(productsAction.loadedProducts, (state) => {
+  initialProductState,
+  on(productsAction.getProducts, (state) => {
     return {
       ...state,
       loading: true,
       error: undefined,
     };
   }),
-  on(productsAction.loadedProductsSuccess, (state, { products }) => {
+  on(productsAction.getProductsSuccess, (state, { products }) => {
     return {
       ...state,
       products,
       loading: false,
     };
   }),
-  on(productsAction.loadedProductsError, (state, { error }) => {
+  on(productsAction.getProductsError, (state, { error }) => {
     return {
       ...state,
       error,

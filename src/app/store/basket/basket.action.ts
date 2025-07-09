@@ -4,12 +4,15 @@ import { Product } from 'src/app/model/product.interface';
 export const basketAction = createActionGroup({
   source: 'Basket',
   events: {
-    'loaded products in basket with local storage': emptyProps(),
-    'loaded products in basket with local storage success': props<{ products: Product[] }>(),
-    'loaded products in basket with local storage error': props<{ error:unknown }>(),
-    'added product in basket': props<{ product: Product }>(),
+    'get products from basket': emptyProps(),
+    'get products from basket success': props<{ products: Product[] }>(),
+    'get products from basket error': props<{ error:unknown }>(),
+    'add product in basket': props<{ product: Product }>(),
     'delete product in basket': props<{ productId: number }>(),
-    'increment quantity product': props<{ productId: number; quantity:number}>(),
-    'decrement quantity product': props<{ productId: number; quantity:number}>(),
+    'increment product in basket': props<{ productId: number; quantity:number}>(),
+    'decrement product in basket': props<{ productId: number; quantity:number}>(),
+    'post products from basket': emptyProps(),
+    'post products from basket success': emptyProps(),
+    'post products from basket error': props<{ error: unknown }>()
   },
 });

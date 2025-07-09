@@ -3,6 +3,7 @@
     border: 1px solid #353535;
     background: #211A16;
     padding: 30px;
+
 }
 
 .products-item-image {
@@ -61,7 +62,3 @@
     width: 182px;
     height: 62px;
 }
-
-/* .button.products-button span:first-child {
-    margin-right: 10px;
-} */

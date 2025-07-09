@@ -20,18 +20,18 @@ export const initialCurrencyState: CurrencyState = {
 
 const reducer = createReducer(
   initialCurrencyState,
-  on(currencyAction.changeCurrency, (state, { newCurrency }) => ({
+  on(currencyAction.setCurrency, (state, { newCurrency }) => ({
     ...state,
     currentCurrency: newCurrency,
   })),
-  on(currencyAction.loadConversionCurrency, (state) => ({
+  on(currencyAction.getConversionCurrency, (state) => ({
     ...state,
   })),
-  on(currencyAction.loadConversionCurrencySuccess, (state, { coeff }) => ({
+  on(currencyAction.getConversionCurrencySuccess, (state, { coeff }) => ({
     ...state,
     conversionCoeff: coeff,
   })),
-  on(currencyAction.loadConversionCurrencyError, (state, { error }) => ({
+  on(currencyAction.getConversionCurrencyError, (state, { error }) => ({
     ...state,
     error,
   }))

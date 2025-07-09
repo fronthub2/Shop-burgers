@@ -1,84 +1,99 @@
-import {
-  createEntityAdapter,
-  EntityAdapter,
-  EntityState,
-  Update,
-} from '@ngrx/entity';
-import { createFeature, createReducer, on } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, Update } from '@ngrx/entity';
+import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { Product } from 'src/app/model/product.interface';
 import { basketAction } from './basket.action';
 
-export interface BasketState extends EntityState<Product> {
-  selectedProductId: number | null;
-}
+export const basketAdapter: EntityAdapter<Product> =
+  createEntityAdapter<Product>();
 
-export const productAdapter: EntityAdapter<Product> =
-  createEntityAdapter<Product>({
-    selectId: (product: Product) => product.id,
-  });
-
-export const initialBasketProducts: BasketState =
-  productAdapter.getInitialState({
-    selectedProductId: null,
-  });
+export const initialBasketProductsState = basketAdapter.getInitialState();
 
 const reducer = createReducer(
-  initialBasketProducts,
-  on(basketAction.loadedProductsInBasketWithLocalStorage, (state) => {
+  initialBasketProductsState,
+  on(basketAction.getProductsFromBasket, (state) => {
     return {
       ...state,
+      error: undefined,
     };
   }),
-  on(
-    basketAction.loadedProductsInBasketWithLocalStorageSuccess,
-    (state, products) => {
-      return {
-        ...state,
-        products,
-      };
-    }
-  ),
-  on(
-    basketAction.loadedProductsInBasketWithLocalStorageError,
-    (state, { error }) => {
-      return {
-        ...state,
-        error,
-      };
-    }
-  ),
-  on(basketAction.addedProductInBasket, (state, { product }) => {
-    return productAdapter.addOne(product, state);
+  on(basketAction.getProductsFromBasketSuccess, (state, { products }) => {
+    return basketAdapter.setAll(products, state);
+  }),
+  on(basketAction.getProductsFromBasketError, (state, { error }) => {
+    return {
+      ...state,
+      error,
+    };
+  }),
+  on(basketAction.addProductInBasket, (state, { product }) => {
+    return basketAdapter.addOne({ ...product, quantity: 1 }, state);
   }),
   on(basketAction.deleteProductInBasket, (state, { productId }) => {
-    return productAdapter.removeOne(productId, state);
+    return basketAdapter.removeOne(productId, state);
   }),
   on(
-    basketAction.incrementQuantityProduct,
+    basketAction.incrementProductInBasket,
+    (state, { productId, quantity }) => {
+      const newProduct: Update<Product> = {
+        id: productId,
+        changes: { quantity: quantity + 1 },
+      };
+
+      return basketAdapter.updateOne(newProduct, state);
+    }
+  ),
+  on(
+    basketAction.decrementProductInBasket,
     (state, { productId, quantity }) => {
       const currentQuantity = (state.entities[productId] as Product).quantity;
 
       const newProduct: Update<Product> = {
         id: productId,
-        changes: { quantity: quantity + currentQuantity },
+        changes: { quantity: quantity - 1 },
       };
-      return productAdapter.updateOne(newProduct, state);
+
+      if (currentQuantity === 1) {
+        return basketAdapter.removeOne(productId, state);
+      }
+
+      return basketAdapter.updateOne(newProduct, state);
     }
   ),
-  on(
-    basketAction.decrementQuantityProduct,
-    (state, { productId, quantity }) => {
-      const newProduct: Update<Product> = {
-        id: productId,
-        changes: { quantity: quantity },
-      };
-
-      return productAdapter.updateOne(newProduct, state);
-    }
-  )
+  on(basketAction.postProductsFromBasket, (state) => {
+    return {
+      ...state,
+      error: undefined,
+    };
+  }),
+  on(basketAction.postProductsFromBasketSuccess, (state) => {
+    return {
+      ...state,
+    };
+  }),
+  on(basketAction.postProductsFromBasketError, (state, { error }) => {
+    return {
+      ...state,
+      error,
+    };
+  })
 );
 
-export const basketProductsFeature = createFeature({
-  name: 'Basket Product',
+export const basketFeature = createFeature({
+  name: 'Basket',
   reducer,
+  extraSelectors: ({ selectBasketState }) => {
+    const { selectAll, selectEntities } =
+      basketAdapter.getSelectors(selectBasketState);
+
+    return {
+      selectAllBasketItems: selectAll,
+      selectBasketItemById: (id: number) =>
+        createSelector(selectEntities, (entities) => entities[id]),
+      selectHasProductInBasket: (productId: number) =>
+        createSelector(selectEntities, (entities) => !!entities[productId]),
+      selectTotalProductCount: createSelector(selectAll, (items) =>
+        items.reduce((count, item) => count + item.quantity, 0)
+      ),
+    };
+  },
 });

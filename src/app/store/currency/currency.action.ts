@@ -4,9 +4,9 @@ import { CURRENCY } from "src/app/model/currency.enum";
 export const currencyAction = createActionGroup({
     source: 'Currency',
     events: {
-        'change currency': props<{ newCurrency: CURRENCY }>(),
-        'load conversion currency': emptyProps(),
-        'load conversion currency success': props<{ coeff: { [key in CURRENCY]: number } }>(),
-        'load conversion currency error': props<{ error: unknown }>(),
+        'set currency': props<{ newCurrency: CURRENCY }>(),
+        'get conversion currency': emptyProps(),
+        'get conversion currency success': props<{ coeff: { [key in CURRENCY]: number } }>(),
+        'get conversion currency error': props<{ error: unknown }>(),
     }
 })

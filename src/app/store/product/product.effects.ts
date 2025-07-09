@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { ProductService } from 'src/app/services/product.service';
+import { HttpProductService } from 'src/app/services/http-product.service';
 import { productsAction } from './product.action';
 
 @Injectable()
 export class ProductEffects {
   constructor(
     private action$: Actions,
-    private productService: ProductService
+    private httpProductService: HttpProductService
   ) {}
 
   loadedProducts$ = createEffect(() =>
     this.action$.pipe(
-      ofType(productsAction.loadedProducts),
+      ofType(productsAction.getProducts),
       switchMap(() =>
-        this.productService.getProducts().pipe(
-          map((products) => productsAction.loadedProductsSuccess({ products })),
+        this.httpProductService.getHttpProducts().pipe(
+          map((products) => productsAction.getProductsSuccess({ products })),
           catchError((error) =>
-            of(productsAction.loadedProductsError({ error }))
+            of(productsAction.getProductsError({ error }))
           )
         )
       )
