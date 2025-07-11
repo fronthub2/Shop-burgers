@@ -18,8 +18,4 @@ export class HttpProductInBasketService {
   getHttpBasketProductById(productId: number): Observable<Product> {
     return this.http.get<Product>(`${this.basketUrl}/${productId}`);
   }
-
-  postHttpBasketProductById(products: Product[]): Observable<Product> {
-    return this.http.post<Product>(`${this.basketUrl}`, products);
-  }
 }

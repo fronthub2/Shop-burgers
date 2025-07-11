@@ -34,7 +34,6 @@ export class ProductListComponent implements OnInit {
 
   addProductInBasket(product: Product): void {
     this.store.dispatch(basketAction.addProductInBasket({ product }));
-    this.saveProductsFromBasket();
   }
 
   addQuantity(product: Product): void {
@@ -44,7 +43,6 @@ export class ProductListComponent implements OnInit {
         quantity: product.quantity,
       })
     );
-    this.saveProductsFromBasket();
   }
 
   deleteQuantity(product: Product): void {
@@ -54,14 +52,9 @@ export class ProductListComponent implements OnInit {
         quantity: product.quantity,
       })
     );
-    this.saveProductsFromBasket();
   }
 
   getBasketProductById(productId: number): Observable<Product | undefined> {
     return this.store.select(basketFeature.selectBasketItemById(productId));
-  }
-
-  private saveProductsFromBasket(): void {
-    this.store.dispatch(basketAction.postProductsFromBasket());
   }
 }

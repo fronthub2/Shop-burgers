@@ -59,31 +59,13 @@ const reducer = createReducer(
       return basketAdapter.updateOne(newProduct, state);
     }
   ),
-  on(basketAction.postProductsFromBasket, (state) => {
-    return {
-      ...state,
-      error: undefined,
-    };
-  }),
-  on(basketAction.postProductsFromBasketSuccess, (state) => {
-    return {
-      ...state,
-    };
-  }),
-  on(basketAction.postProductsFromBasketError, (state, { error }) => {
-    return {
-      ...state,
-      error,
-    };
-  })
 );
 
 export const basketFeature = createFeature({
   name: 'Basket',
   reducer,
   extraSelectors: ({ selectBasketState }) => {
-    const { selectAll, selectEntities } =
-      basketAdapter.getSelectors(selectBasketState);
+    const { selectAll, selectEntities } = basketAdapter.getSelectors(selectBasketState);
 
     return {
       selectAllBasketItems: selectAll,

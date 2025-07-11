@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 import { HttpProductInBasketService } from 'src/app/services/http-product-in-basket.service';
 import { basketAction } from './basket.action';
-import { basketFeature } from './basket.reducer';
 
 @Injectable()
 export class BasketEffects {
   constructor(
     private action$: Actions,
     private basketService: HttpProductInBasketService,
-    private store: Store
   ) {}
 
   getProductsFromBasket$ = createEffect(() =>
@@ -29,19 +26,4 @@ export class BasketEffects {
       )
     )
   );
-
-  // saveProductFromBasket$ = createEffect(() =>
-  //   this.action$.pipe(
-  //     ofType(basketAction.postProductsFromBasket),
-  //     withLatestFrom(this.store.select(basketFeature.selectAllBasketItems)),
-  //     switchMap(([action, product]) =>
-  //       this.basketService.postHttpBasketProductById(product).pipe(
-  //         map(() => basketAction.postProductsFromBasketSuccess()),
-  //         catchError((error) =>
-  //           of(basketAction.postProductsFromBasketError({ error }))
-  //         )
-  //       )
-  //     )
-  //   )
-  // );
 }

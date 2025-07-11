@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
 import { CURRENCY } from '../model/currency.enum';
@@ -10,13 +10,14 @@ import { currencyFeature } from '../store/currency/currency.reducer';
   selector: 'app-layouts',
   templateUrl: './layouts.component.html',
   styleUrls: ['./layouts.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutsComponent {
   constructor(private scrollService: ScrollService, private store: Store) {}
 
   currency$ = this.store.select(currencyFeature.selectCurrentCurrency);
 
-  changeCurrency() {
+  changeCurrency(): void {
     this.currency$.pipe(take(1)).subscribe({
       next: (c) => {
         this.store.dispatch(
@@ -26,7 +27,7 @@ export class LayoutsComponent {
     });
   }
 
-  private getCurrency(currentCurrency: CURRENCY) {
+  private getCurrency(currentCurrency: CURRENCY): CURRENCY {
     switch (currentCurrency) {
       case CURRENCY.USD:
         return CURRENCY.RUB;
@@ -41,7 +42,7 @@ export class LayoutsComponent {
     }
   }
 
-  scrollTo(element: string) {
+  scrollTo(element: string): void {
     this.scrollService.scrollToElement(element);
   }
 }

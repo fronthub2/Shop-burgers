@@ -3,7 +3,6 @@
     <div class="products-title common-title">выберите свой бургер</div>
     <div class="products-items">
       <ng-container *ngIf="currency$ | async as currency">
-
         <ng-container *ngIf="products$ | async as products">
           <app-product
             *ngFor="let product of products"
