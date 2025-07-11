@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { LayoutsModule } from './layouts/layouts.module';
 import { LandingPageModule } from './pages/landing-page/landing-page.module';
-import { BasketEffects } from './store/basket/basket.effects';
 import { basketFeature } from './store/basket/basket.reducer';
 import { currencyFeature } from './store/currency/currency.reducer';
 import { ProductEffects } from './store/product/product.effects';
@@ -27,7 +26,7 @@ import { productsFeature } from './store/product/product.reducer';
     StoreModule.forFeature(productsFeature),
     StoreModule.forFeature(currencyFeature),
     StoreModule.forFeature(basketFeature),
-    EffectsModule.forRoot([ProductEffects, BasketEffects]),
+    EffectsModule.forRoot([ProductEffects]),
     StoreDevtoolsModule.instrument({
       name: 'Burger Shop v16',
       maxAge: 25,

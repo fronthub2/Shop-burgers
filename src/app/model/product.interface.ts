@@ -4,8 +4,8 @@ export interface Product {
   title: string;
   text: string;
   price: number;
-  basePrice: number;
-  baseGrams: number;
   grams: number;
   quantity: number;
+  basePrice: number;
+  baseGrams: number;
 }

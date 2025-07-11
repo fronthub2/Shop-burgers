@@ -13,7 +13,7 @@ import { Product } from 'src/app/model/product.interface';
 export class ProductComponent {
   @Input() product!: Product;
   @Input() currency!: CURRENCY;
-  @Input() isHasProductInBasket$!:Observable<boolean>;
+  @Input() isHasProductInBasket$!:Observable<boolean | undefined>;
   @Input() productInBasket$!:Observable<Product | undefined>;
   @Output() emitProductInBasket = new EventEmitter<Product>();
   @Output() emitAddQuantityProduct = new EventEmitter<Product>();

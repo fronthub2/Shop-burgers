@@ -12,9 +12,10 @@ export const selectProductsWithConvertedPrice = createSelector(
   selectConversionCoeff,
   (products, currentCurrency, conversionCoeff) => {
     const conversionRate = conversionCoeff[currentCurrency] || conversionCoeff.$;
+
     return products.map((product) => ({
       ...product,
-      price: parseFloat((product.basePrice * conversionRate).toFixed(2)),
+      price: product.basePrice * conversionRate,
     }));
   }
 );

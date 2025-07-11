@@ -1,5 +1,5 @@
 import { createEntityAdapter, EntityAdapter, Update } from '@ngrx/entity';
-import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import { Product } from 'src/app/model/product.interface';
 import { basketAction } from './basket.action';
 
@@ -34,9 +34,14 @@ const reducer = createReducer(
   on(
     basketAction.incrementProductInBasket,
     (state, { productId, quantity }) => {
+      const newQuantity = quantity + 1;
       const newProduct: Update<Product> = {
         id: productId,
-        changes: { quantity: quantity + 1 },
+        changes: {
+          quantity:newQuantity,
+          price: (state.entities[productId] as Product).basePrice * newQuantity,
+          grams: (state.entities[productId] as Product).baseGrams * newQuantity
+        },
       };
 
       return basketAdapter.updateOne(newProduct, state);
@@ -46,13 +51,18 @@ const reducer = createReducer(
     basketAction.decrementProductInBasket,
     (state, { productId, quantity }) => {
       const currentQuantity = (state.entities[productId] as Product).quantity;
+      let newQuantity = quantity - 1;
 
       const newProduct: Update<Product> = {
         id: productId,
-        changes: { quantity: quantity - 1 },
+        changes: {
+          quantity: newQuantity,
+          price: (state.entities[productId] as Product).basePrice * newQuantity,
+          grams: (state.entities[productId] as Product).baseGrams * newQuantity
+        },
       };
 
-      if (currentQuantity === 1) {
+      if (currentQuantity <= 1) {
         return basketAdapter.removeOne(productId, state);
       }
 
@@ -64,18 +74,4 @@ const reducer = createReducer(
 export const basketFeature = createFeature({
   name: 'Basket',
   reducer,
-  extraSelectors: ({ selectBasketState }) => {
-    const { selectAll, selectEntities } = basketAdapter.getSelectors(selectBasketState);
-
-    return {
-      selectAllBasketItems: selectAll,
-      selectBasketItemById: (id: number) =>
-        createSelector(selectEntities, (entities) => entities[id]),
-      selectHasProductInBasket: (productId: number) =>
-        createSelector(selectEntities, (entities) => !!entities[productId]),
-      selectTotalProductCount: createSelector(selectAll, (items) =>
-        items.reduce((count, item) => count + item.quantity, 0)
-      ),
-    };
-  },
 });

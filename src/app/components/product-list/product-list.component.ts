@@ -3,7 +3,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/model/product.interface';
 import { basketAction } from 'src/app/store/basket/basket.action';
-import { basketFeature } from 'src/app/store/basket/basket.reducer';
+import {
+  selectBasketProductWithDynamicPricing,
+  selectHasProductInBasket
+} from 'src/app/store/basket/basket.selector';
 import { currencyAction } from 'src/app/store/currency/currency.action';
 import { currencyFeature } from 'src/app/store/currency/currency.reducer';
 import { selectProductsWithConvertedPrice } from 'src/app/store/currency/currency.selector';
@@ -20,7 +23,6 @@ export class ProductListComponent implements OnInit {
 
   products$ = this.store.select(selectProductsWithConvertedPrice);
   currency$ = this.store.select(currencyFeature.selectCurrentCurrency);
-  basketProducts$ = this.store.select(basketFeature.selectAllBasketItems);
 
   ngOnInit(): void {
     this.store.dispatch(productsAction.getProducts());
@@ -28,8 +30,8 @@ export class ProductListComponent implements OnInit {
     this.store.dispatch(basketAction.getProductsFromBasket());
   }
 
-  hasBasketProducts(productId: number): Observable<boolean> {
-    return this.store.select(basketFeature.selectHasProductInBasket(productId));
+  hasBasketProducts(productId: number): Observable<boolean | undefined> {
+    return this.store.select(selectHasProductInBasket(productId));
   }
 
   addProductInBasket(product: Product): void {
@@ -55,6 +57,6 @@ export class ProductListComponent implements OnInit {
   }
 
   getBasketProductById(productId: number): Observable<Product | undefined> {
-    return this.store.select(basketFeature.selectBasketItemById(productId));
+    return this.store.select(selectBasketProductWithDynamicPricing(productId));
   }
 }
