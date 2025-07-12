@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Product } from 'src/app/model/product.interface';
 import { basketAction } from 'src/app/store/basket/basket.action';
 import {
-  selectBasketProductWithDynamicPricing,
+  selectBasketProductById,
   selectHasProductInBasket
 } from 'src/app/store/basket/basket.selector';
 import { currencyAction } from 'src/app/store/currency/currency.action';
@@ -57,6 +57,6 @@ export class ProductListComponent implements OnInit {
   }
 
   getBasketProductById(productId: number): Observable<Product | undefined> {
-    return this.store.select(selectBasketProductWithDynamicPricing(productId));
+    return this.store.select(selectBasketProductById(productId));
   }
 }

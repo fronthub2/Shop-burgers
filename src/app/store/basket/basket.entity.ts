@@ -1,6 +1,6 @@
 import { EntityState } from '@ngrx/entity';
-import { BasketProduct } from 'src/app/model/product.interface';
+import { Product } from 'src/app/model/product.interface';
 
-export interface BasketState extends EntityState<BasketProduct> {
-  products: BasketProduct[];
+export interface BasketState extends EntityState<Product> {
+  products: Product[];
 }

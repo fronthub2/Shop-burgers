@@ -11,5 +11,6 @@ export const basketAction = createActionGroup({
     'delete product in basket': props<{ productId: number }>(),
     'increment product in basket': props<{ productId: number; quantity: number}>(),
     'decrement product in basket': props<{ productId: number; quantity: number}>(),
+    'clear product in basket': emptyProps()
   },
 });

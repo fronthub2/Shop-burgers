@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component
+} from '@angular/core';
 import { ScrollService } from 'src/app/services/scroll.service';
 
 @Component({
@@ -10,7 +13,7 @@ import { ScrollService } from 'src/app/services/scroll.service';
 export class LandingPageComponent {
   constructor(private scrollService: ScrollService) {}
 
-  scroll(element: string) {
+  scroll(element: string): void {
     this.scrollService.scrollToElement(element);
   }
 }

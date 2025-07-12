@@ -15,7 +15,7 @@
         <div
           class="order-form-input"
           [class]="{
-            error: form.get('order')?.invalid && (form.get('order')?.dirty || form.get('order')?.touched)
+            error: form.get('order')?.invalid && form.get('order')?.dirty
           }"
         >
           <input
@@ -29,7 +29,7 @@
         <div
           class="order-form-input"
           [class]="{
-            error: form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)
+            error: form.get('name')?.invalid && form.get('name')?.dirty
           }"
         >
           <input
@@ -42,7 +42,7 @@
         <div
           class="order-form-input"
           [class]="{
-            error: form.get('phone')?.invalid && (form.get('phone')?.dirty || form.get('phone')?.touched)
+            error: form.get('phone')?.invalid && form.get('phone')?.dirty
           }"
         >
           <input
@@ -52,7 +52,14 @@
             formControlName="phone"
           />
         </div>
-        <app-button (click)="confirmOrder()" [isDisabled]="!form.valid" title="Оформить заказ"></app-button>
+        <div class="order-form-input">
+          <input type="text" formControlName="totalPrice" readonly />
+        </div>
+        <app-button
+          (click)="confirmOrder()"
+          [isDisabled]="!form.valid"
+          title="Оформить заказ"
+        ></app-button>
       </form>
     </div>
   </div>

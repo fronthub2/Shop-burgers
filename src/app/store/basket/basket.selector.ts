@@ -3,26 +3,27 @@ import { currencyFeature } from '../currency/currency.reducer';
 import { basketAdapter, basketFeature } from './basket.reducer';
 
 const selectBasketState = basketFeature.selectBasketState;
+
 const { selectAll, selectEntities } =
   basketAdapter.getSelectors(selectBasketState);
-
-export const selectBasketProducts = selectAll;
-export const selectBasketProductById = (id: number) =>
-  createSelector(selectEntities, (entity) => entity[id]);
-export const selectHasProductInBasket = (productId: number) =>
-  createSelector(selectEntities, (entities) => !!entities[productId]);
-
-export const selectBasketTotal = createSelector(
-  selectBasketProducts,
-  (products) => products.reduce((sum, product) => sum + product.price, 0)
-);
 
 const selectCurrentCurrency = currencyFeature.selectCurrentCurrency;
 const selectConversionCoeff = currencyFeature.selectConversionCoeff;
 
-export const selectBasketProductWithDynamicPricing = (productId: number) =>
+export const selectAllBasketProducts = selectAll;
+
+export const selectBasketEntities = (id: number) =>
+  createSelector(selectEntities, (entity) => entity[id]);
+export const selectHasProductInBasket = (productId: number) =>
+  createSelector(selectEntities, (entities) => !!entities[productId]);
+
+export const selectBasketTotal = createSelector(selectAll, (products) =>
+  products.reduce((sum, product) => sum + product.price, 0)
+);
+
+export const selectBasketProductById = (productId: number) =>
   createSelector(
-    selectBasketProductById(productId),
+    selectBasketEntities(productId),
     selectCurrentCurrency,
     selectConversionCoeff,
     (product, currentCurrency, conversionCoeff) => {
@@ -40,3 +41,24 @@ export const selectBasketProductWithDynamicPricing = (productId: number) =>
       };
     }
   );
+
+export const selectBasketProducts = createSelector(
+  selectAllBasketProducts,
+  selectCurrentCurrency,
+  selectConversionCoeff,
+  (products, currentCurrency, conversionCoeff) => {
+    const conversionRate =
+      conversionCoeff[currentCurrency] || conversionCoeff.$;
+
+    return products.map((prod) => {
+      const basePrice = prod.basePrice * conversionRate;
+      const totalPrice = basePrice * prod.quantity;
+
+      return {
+        ...prod,
+        price: totalPrice,
+        basePrice: basePrice,
+      };
+    });
+  }
+);

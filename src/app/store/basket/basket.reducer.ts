@@ -69,6 +69,9 @@ const reducer = createReducer(
       return basketAdapter.updateOne(newProduct, state);
     }
   ),
+  on(basketAction.clearProductInBasket, ((state) => {
+    return basketAdapter.removeAll(state);
+  }))
 );
 
 export const basketFeature = createFeature({
