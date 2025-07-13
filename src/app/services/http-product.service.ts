@@ -7,15 +7,15 @@ import { Product } from '../model/product.interface';
   providedIn: 'root',
 })
 export class HttpProductService {
-  private productUrl: string = 'http://localhost:3000/products';
+  private productUrlJSON: string = 'assets/data/product.json';
 
   constructor(private http: HttpClient) {}
 
   getHttpProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productUrl);
+    return this.http.get<Product[]>(this.productUrlJSON);
   }
 
   getHttpProductById(productId: number): Observable<Product> {
-    return this.http.get<Product>(`${this.productUrl}/${productId}`);
+    return this.http.get<Product>(`${this.productUrlJSON}/${productId}`);
   }
 }

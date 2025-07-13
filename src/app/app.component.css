@@ -1,5 +1,5 @@
 .main {
-    background-image: url(../assets/image/main_bg.png);
+    background-image: url('/assets/image/main_bg.png');
     background-position: top center;
     overflow: hidden;
 }
