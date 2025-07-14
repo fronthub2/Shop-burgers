@@ -1,5 +1,5 @@
 .products {
-    background-image: url('/assets/image/burgers_bg.png');
+    background-image: url('../../../assets/image/burgers_bg.png');
     background-position: top center;
     background-size: 1400px;
 }
