@@ -42,7 +42,7 @@
         <div
           class="order-form-input"
           [class]="{
-            error: form.get('phone')?.invalid && form.get('phone')?.dirty
+            error: form.controls.phone.errors && form.controls.phone.touched
           }"
         >
           <input
