@@ -52,6 +52,13 @@
             formControlName="phone"
           />
         </div>
+        <ng-container
+          *ngIf="form.controls.phone.errors && form.controls.phone.touched"
+        >
+          <p class="order-form-error">
+            {{ form.controls.phone.errors | authOrder }}
+          </p>
+        </ng-container>
         <div class="order-form-input">
           <input type="text" formControlName="totalPrice" readonly />
         </div>

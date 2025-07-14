@@ -38,6 +38,7 @@
 .order-form-inputs {
     display: flex;
     flex-direction: column;
+    gap: 10px;
     margin-top: 40px;
 }
 
@@ -49,7 +50,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+}
+
+.order-form-error {
+    font-size: 10px;
 }
 
 .order-form-input.error {

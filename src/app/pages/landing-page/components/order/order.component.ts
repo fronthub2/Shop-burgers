@@ -13,6 +13,7 @@ import {
   selectBasketProducts,
 } from 'src/app/store/basket/basket.selector';
 import { currencyFeature } from 'src/app/store/currency/currency.reducer';
+import { validPhoneNumber } from './order.validators';
 
 @Component({
   selector: 'app-order',
@@ -34,7 +35,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   form = new FormGroup({
     order: new FormControl<string[] | null>(null, [Validators.required]),
     name: new FormControl<string>('', [Validators.required]),
-    phone: new FormControl<string>('', [Validators.required]),
+    phone: new FormControl<number | null>(null, [Validators.required, validPhoneNumber()]),
     totalPrice: new FormControl<string>(''),
   });
 
